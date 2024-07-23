@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    // Escríbe aquí tu código
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita el envío del formulario
+
+    // Obtener los valores de los campos
+    const nombre = document.getElementById('nombre').value;
+    const asunto = document.getElementById('asunto').value;
+    const mensaje = document.getElementById('mensaje').value;
+
+    // Expresión regular para validar solo letras
+    const regex = /^[A-Za-z\s]+$/;
+
+    // Variables para mostrar mensajes de error
+    let errorNombre = '';
+    let errorAsunto = '';
+    let errorMensaje = '';
+
+    // Validar el campo nombre
+    if (!regex.test(nombre)) {
+        errorNombre = 'El nombre solo debe contener letras y espacios.';
+    }
+
+    // Validar el campo asunto
+    if (!regex.test(asunto)) {
+        errorAsunto = 'El asunto solo debe contener letras y espacios.';
+    }
+
+    // Validar el campo mensaje
+    if (!regex.test(mensaje)) {
+        errorMensaje = 'El mensaje solo debe contener letras y espacios.';
+    }
+
+    // Mostrar mensajes de error
+    document.querySelector('.errorNombre').textContent = errorNombre;
+    document.querySelector('.errorAsunto').textContent = errorAsunto;
+    document.querySelector('.errorMensaje').textContent = errorMensaje;
+
+    // Mostrar mensaje de éxito si no hay errores
+    if (!errorNombre && !errorAsunto && !errorMensaje) {
+        document.querySelector('.resultado').textContent = 'Formulario enviado con éxito.';
+    } else {
+        document.querySelector('.resultado').textContent = '';
+    }
+});
+
+    </script>
+</body>
+
+</html>
